@@ -3,13 +3,16 @@ import streamlit_authenticator as stauth
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
+from streamlit.web import cli as stcli
+from streamlit import runtime
+import sys
 
 
 # Handle OAuth2 callback route
 AUTHORIZATION_CODE = "code"
 REDIRECT_URI = "https://khatabook.streamlit.app/"  # Replace with your redirect URI
 
-if st._is_running_with_streamlit:
+if runtime.exists():
     ctx = ReportThread.get_report_ctx()
     session_id = ctx.session_id
     session_info = Server.get_current()._session_info_by_id[session_id]
