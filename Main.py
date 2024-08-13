@@ -13,9 +13,10 @@ AUTHORIZATION_CODE = "code"
 REDIRECT_URI = "https://khatabook.streamlit.app/"  # Replace with your redirect URI
 
 if runtime.exists():
-    ctx = ReportThread.get_report_ctx()
-    session_id = ctx.session_id
-    session_info = Server.get_current()._session_info_by_id[session_id]
+    # ctx = ReportThread.get_report_ctx()
+    session_info = runtime.session_manager.SessionInfo
+    # session_info = ctx.session_id
+    # session_info = Server.get_current()._session_info_by_id[session_id]
 
     if session_info.ws.request_info.request_line == "GET /":
         auth_code = session_info.ws.request_info.query_params[AUTHORIZATION_CODE]
